@@ -30,6 +30,7 @@ function fireNotification(obj, event) {
   event.waitUntil(self.registration.showNotification(title, {
     body: body,
     icon: icon,
-    tag: tag
+    tag: tag,
+    vibrate: [1000, 500, 2000]
   }));
 }

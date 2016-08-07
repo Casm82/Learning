@@ -66,7 +66,7 @@ app.post('/', function (request, response) {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Origin, Access-Control-Allow-Headers"});
 
-  response.write(true);
+  response.write(JSON.stringify({"status": "ok"}));
 
   response.end();
 
