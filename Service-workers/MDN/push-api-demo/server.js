@@ -10,8 +10,6 @@ var options = {
   passphrase: 'password'
 };
 
-var dupe = 'true';
-
 var app = express();
 app.use(serveStatic(__dirname, {'index': false}));
 
@@ -68,7 +66,7 @@ app.post('/', function (request, response) {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Origin, Access-Control-Allow-Headers"});
 
-  response.write(dupe);
+  response.write(true);
 
   response.end();
 

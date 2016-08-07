@@ -109,7 +109,7 @@ function initialiseState(reg) {
       // set up a message channel to communicate with the SW
       var channel = new MessageChannel();
       channel.port1.onmessage = function(e) {
-        console.log(e);
+//         console.log(e);
         handleChannelMessage(e.data);
       }
 
@@ -117,8 +117,6 @@ function initialiseState(reg) {
       mySW.postMessage('hello', [channel.port2]);
   });
 }
-
-
 
 function subscribe() {
   // duplicateNameCheck(nameInput.value).then(function(dupeValue) {
@@ -237,12 +235,12 @@ function postSubscribeObj(statusType, name, endpoint, rawKey, rawAuthSecret) {
     request.setRequestHeader('Content-Type', 'application/json');
 
     var subscribeObj = {
-                         statusType: statusType,
-                         name: nameInput.value,
-                         endpoint: endpoint,
-                         key: btoa(String.fromCharCode.apply(null, new Uint8Array(rawKey))),
-                         authSecret:  btoa(String.fromCharCode.apply(null, new Uint8Array(rawAuthSecret)))
-                       }
+      statusType: statusType,
+      name:       nameInput.value,
+      endpoint:   endpoint,
+      key:        btoa(String.fromCharCode.apply(null, new Uint8Array(rawKey))),
+      authSecret: btoa(String.fromCharCode.apply(null, new Uint8Array(rawAuthSecret)))
+    };
     console.log(subscribeObj);
     request.send(JSON.stringify(subscribeObj));
 }
@@ -279,9 +277,7 @@ function updateStatus(endpoint, rawKey, rawAuthSecret, statusType) {
     controlsBlock.removeChild(sendInput);
 
     postSubscribeObj(statusType, name, endpoint, rawKey, rawAuthSecret);
-
   }
-
 }
 
 function handleChannelMessage(data) {
@@ -333,37 +329,3 @@ function sendChatMessage(chatMsg) {
     })
   })
 }
-
-// function duplicateNameCheck(name) {
-//   return new Promise(function(resolve, reject) {
-//     var dupeValue;
-//     var request = new XMLHttpRequest();
-
-//     request.open('POST', 'https://127.0.0.1:7000');
-//     request.setRequestHeader('Content-Type', 'application/json');
-
-//     var messageObj = {
-//                         statusType: 'dupeCheck',
-//                         name: name,
-//                         endpoint: null
-//                      }
-
-//     request.onreadystatechange = function() {
-//       if (request.readyState === XMLHttpRequest.DONE) {
-//         if (request.status === 200) {
-//           if(request.responseText === 'true') {
-//             console.log('has it returned anything?');
-//             resolve(dupeValue = true);
-//           } else {
-//             resolve(dupeValue = false);
-//           }
-//         } else {
-//           reject(Error('There was a problem with the request.'));
-//         }
-//       }
-//     }
-
-
-//     request.send(JSON.stringify(messageObj));
-//   });
-// }
